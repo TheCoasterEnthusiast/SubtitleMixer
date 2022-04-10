@@ -4,8 +4,13 @@ Current goals for SubtitleMixer:
 2. Adjust timings for subtitles
 """
 import re
+import tkinter as tk
+from tkinter import filedialog
 
 DEFAULT_FILE_NAME = 'combined_subtitles.srt'
+
+root = tk.Tk()
+root.withdraw()
 
 
 def create_subtitle_list(lines: list) -> list[list]:
@@ -30,10 +35,12 @@ def read_file(filename):
         return lines
 
 
-def combine_subtitles(srt_name_1: str, srt_name_2: str):
+def combine_subtitles():
+    file_path_1 = filedialog.askopenfilename()
+    file_path_2 = filedialog.askopenfilename()
 
-    srt_1_lines = read_file(srt_name_1)
-    srt_2_lines = read_file(srt_name_2)
+    srt_1_lines = read_file(file_path_1)
+    srt_2_lines = read_file(file_path_2)
 
     subtitle_list_1 = create_subtitle_list(srt_1_lines)
     subtitle_list_2 = create_subtitle_list(srt_2_lines)
@@ -64,7 +71,8 @@ def main():
 
         if user_input == 'q':
             running = False
+        elif user_input == '1':
+            combine_subtitles()
 
-
+combine_subtitles()
 #main()
-combine_subtitles("english.srt", "spanish.srt")
