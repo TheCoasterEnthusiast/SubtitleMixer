@@ -13,7 +13,7 @@ root = tk.Tk()
 root.withdraw()
 
 
-def create_subtitle_list(lines: list) -> list[list]:
+def create_subtitle_list(lines: list):
     subtitle_list = [[]]
     for line in lines:
         if line == '\n':
@@ -54,9 +54,13 @@ def combine_subtitles():
     for subtitle in subtitle_list_1:
         subtitle.append('\n')
 
+    # ask where to save file and file name
+
     with open(DEFAULT_FILE_NAME, 'w') as file:
         for subtitle in subtitle_list_1:
             file.writelines(subtitle)
+
+    print(f'Subtitles combined in "{DEFAULT_FILE_NAME}"')
 
 
 def main():
@@ -67,12 +71,12 @@ def main():
         1 - Combine subtitles
         2 - Adjust subtitle timings
         q - Quit
-        """)
+""")
 
         if user_input == 'q':
             running = False
         elif user_input == '1':
             combine_subtitles()
 
-combine_subtitles()
-#main()
+
+main()
